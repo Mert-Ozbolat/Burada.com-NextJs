@@ -1,25 +1,20 @@
-import DetailClient from '@/app/components/details/DetailClient';
-import React from 'react'
-import { products } from '@/utils/Products';
+import React from "react";
+import { product } from "@/utils/Products";
+import DetailClient from "@/app/components/details/DetailClient";
 
 type DetailProps = {
-    productId?: string
-}
+    productId?: string;
+};
 
-
-const Detail = ({ params }: { params: DetailProps }) => {
-
-
-    const { productId } = params;
-
-
-    const product = products.find(product => product.id == productId)
+const Detail = async ({ params }: { params: Promise<DetailProps> }) => {
+    const resolvedParams = await params;
+    const { productId } = resolvedParams;
 
     return (
         <div>
-            <DetailClient />
+            <DetailClient product={product} />
         </div>
-    )
-}
+    );
+};
 
-export default Detail
+export default Detail;
